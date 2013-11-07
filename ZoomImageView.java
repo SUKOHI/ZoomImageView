@@ -85,6 +85,18 @@ public class ZoomImageView extends View implements OnTouchListener {
 		
 	}
 
+	public void setMaxScale(float scale) {
+		
+		maxScale = scale;
+		
+	}
+
+	public void setMinScale(float scale) {
+		
+		minScale = scale;
+		
+	}
+	
 	public void setDoubleTapDuration(int duration) {
 		
 		doubleTapDuration = duration;
@@ -309,10 +321,20 @@ public class ZoomImageView extends View implements OnTouchListener {
 }
 /***Sample
 
+	// Xml
+
 	<com.sukohi.lib.ZoomImageView
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:src="@drawable/drawable"
 	    android:background="@color/black" />
+    
+    
+    // Code
+    
+	ZoomImageView zoomImageView = (ZoomImageView) findViewById(R.id.zoomimageview);
+	zoomImageView.setImageResource(R.drawable.drawable);	// or setImageBitmap(bitmap);
+	zoomImageView.setMaxScale(5F);							// skippable(Default:2F)
+	zoomImageView.setMinScale(0.1F);						// skippable(Default:0.5F)
     
 ***/

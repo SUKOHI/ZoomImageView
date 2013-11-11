@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.support.v4.widget.DrawerLayout.LayoutParams;
@@ -51,7 +52,7 @@ public class ZoomImageView extends View implements OnTouchListener {
 		
 		if(srcResourceId > 0) {
 			
-			setImageResource(srcResourceId);
+			setImageResourceId(srcResourceId);
 			
 		}
 		
@@ -75,13 +76,33 @@ public class ZoomImageView extends View implements OnTouchListener {
 	public void setImageBitmap(Bitmap bm) {
 		
 		bitmap = bm;
+		refresh();
 		
 	}
 	
-	public void setImageResource(int resourceId) {
+	public void setImageResourceId(int resourceId) {
 		
 		Resources resources = context.getResources();
 		bitmap = BitmapFactory.decodeResource(resources, resourceId);
+		refresh();
+		
+	}
+	
+	public Rect getImageRect() {
+		
+		return rect;
+		
+	}
+	
+	public float getImageScale() {
+		
+		return scale;
+		
+	}
+	
+	public Point getImagePoint() {
+		
+		return new Point(bitmapX, bitmapY);
 		
 	}
 
@@ -100,6 +121,13 @@ public class ZoomImageView extends View implements OnTouchListener {
 	public void setDoubleTapDuration(int duration) {
 		
 		doubleTapDuration = duration;
+		
+	}
+	
+	private void refresh() {
+		
+		bitmapX = bitmapY = 0;
+		scale = 1F;
 		
 	}
 	
@@ -333,8 +361,12 @@ public class ZoomImageView extends View implements OnTouchListener {
     // Code
     
 	ZoomImageView zoomImageView = (ZoomImageView) findViewById(R.id.zoomimageview);
-	zoomImageView.setImageResource(R.drawable.drawable);	// or setImageBitmap(bitmap);
+	zoomImageView.setImageResourceId(R.drawable.drawable);	// or setImageBitmap(bitmap);
 	zoomImageView.setMaxScale(5F);							// skippable(Default:2F)
 	zoomImageView.setMinScale(0.1F);						// skippable(Default:0.5F)
+    
+    zoomImageView.getImageRect();	// Get image Rect
+    zoomImageView.getImageScale();	// Get image scale
+    zoomImageView.getImagePoint();	// Get image Point
     
 ***/
